@@ -1,6 +1,5 @@
 package com.fsm.DSCatalog.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fsm.DSCatalog.entities.Category;
+import com.fsm.DSCatalog.Dto.CategoryDto;
 import com.fsm.DSCatalog.services.CategoryService;
 
 @RestController
@@ -18,8 +17,8 @@ public class CategoryControlle {
 	@Autowired
 	private CategoryService categoryService;
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll(){
-		List<Category>list = categoryService.findAll();
+	public ResponseEntity<List<CategoryDto>> findAll(){
+		List<CategoryDto>list = categoryService.findAll();
 		return ResponseEntity.ok(list);
 	}
 	
