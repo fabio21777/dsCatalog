@@ -1,4 +1,4 @@
-package com.fsm.DSCatalog.services;
+package com.fsm.DSCatalog.services.exception;
 
 import java.time.Instant;
 
@@ -10,18 +10,30 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fsm.DSCatalog.controllers.exception.StandardError;
-import com.fsm.DSCatalog.services.exception.ControllerNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 	@ExceptionHandler(ControllerNotFoundException.class)
 	public ResponseEntity<StandardError> entityNotFound(ControllerNotFoundException e,HttpServletRequest request){
+		HttpStatus 	status = HttpStatus.NOT_FOUND;
 		StandardError error = new StandardError();
 		error.setTimestamp(Instant.now());
-		error.setStatus(HttpStatus.NOT_FOUND.value());
+		error.setStatus(status.value());
 		error.setMessage(e.getMessage());
 		error.setPath("Entity not found");
 		error.setPath(request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		return ResponseEntity.status(status).body(error);
+	}
+	
+	@ExceptionHandler(DataBaseException.class)
+	public ResponseEntity<StandardError> dataBaseException(DataBaseException e,HttpServletRequest request){
+		HttpStatus 	status = HttpStatus.BAD_REQUEST;
+		StandardError error = new StandardError();
+		error.setTimestamp(Instant.now());
+		error.setStatus(status.value());
+		error.setMessage(e.getMessage());
+		error.setPath("Entity not found");
+		error.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(error);
 	}
 }
