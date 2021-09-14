@@ -1,9 +1,9 @@
 package com.fsm.DSCatalog.services.exception;
 
-public class EntityNotFoundException extends RuntimeException{
+public class ControllerNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
-	public EntityNotFoundException(String msg) {
+	public ControllerNotFoundException(String msg) {
 		super(msg);
 	}
 
