@@ -14,15 +14,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@EqualsAndHashCode
-@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,7 +29,9 @@ import lombok.Setter;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Long id;
+	@Setter
 	private String name;
 	@Column(columnDefinition = "TEXT")
 	private String description;
@@ -39,7 +39,6 @@ public class Product {
 	private String imgUrl;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant date;
-	@Setter(value = AccessLevel.NONE)
 	@ManyToMany
 	@JoinTable(name = "tb_product_category",
 		joinColumns = @JoinColumn(name = "product_id"),
