@@ -1,14 +1,14 @@
 package com.fsm.DSCatalog.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +23,9 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	@Transactional(readOnly = true)
-	public List<CategoryDto> findAll(){
-		List<Category> list = categoryRepository.findAll();
-		return list.stream().map(x-> new CategoryDto(x)).collect(Collectors.toList());
+	public Page<CategoryDto> findAll(PageRequest pageRequest){
+		Page<Category> list = categoryRepository.findAll(pageRequest);
+		return list.map(x-> new CategoryDto(x));
 	}
 	@Transactional(readOnly = true)
 	public CategoryDto findById(Long id) {
