@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +30,8 @@ public class ProductService {
 	
 	
 	@Transactional(readOnly = true)
-	public Page<ProductDto> findAll(PageRequest pageRequest){
-		Page<Product> list = productRepository.findAll(pageRequest);
+	public Page<ProductDto> findAll(Pageable pageable){
+		Page<Product> list = productRepository.findAll(pageable);
 		return list.map(x-> new ProductDto(x));
 	}
 	

@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,14 +28,8 @@ public class CategoryControlle {
 	@Autowired
 	private CategoryService categoryService;
 	@GetMapping
-	public ResponseEntity<Page<CategoryDto>> findAll (
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "DESC") String direction){
-		
-		PageRequest pageRequest = PageRequest.of(page,linesPerPage,Direction.valueOf(direction),orderBy);
-		Page<CategoryDto> pages = categoryService.findAll(pageRequest);
+	public ResponseEntity<Page<CategoryDto>> findAll (Pageable pageable){
+		Page<CategoryDto> pages = categoryService.findAll(pageable);
 		return ResponseEntity.ok(pages);
 		
 	}
