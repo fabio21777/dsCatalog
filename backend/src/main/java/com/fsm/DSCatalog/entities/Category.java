@@ -35,6 +35,11 @@ public class Category {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
 	
+	public Category(long id, String name ) {
+		this.id = id;
+		this.name = name;
+	}
+	
 	@PrePersist
 	public void prePersist() {
 		createdAt = Instant.now();
@@ -43,4 +48,5 @@ public class Category {
 	public void preUpdate() {
 		updatedAt = Instant.now();
 	}
+
 }

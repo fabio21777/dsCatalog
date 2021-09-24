@@ -35,6 +35,7 @@ public class Product {
 	private Long id;
 	@Setter
 	private String name;
+
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	private Double price;
@@ -47,4 +48,13 @@ public class Product {
 		inverseJoinColumns = @JoinColumn(name = "category_id"))	
 	@Setter(value = AccessLevel.NONE)
 	Set<Category> categories = new HashSet<>();
+	
+	public Product(long id, String name, String description, double price, String imgUrl, Instant date) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.imgUrl = imgUrl;
+		this.date = date;
+	}
 }
