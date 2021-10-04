@@ -1,4 +1,4 @@
-package com.fsm.DSCatalog.ProductServiceTests;
+package com.fsm.DSCatalog.services;
 
 import static org.mockito.Mockito.times;
 
