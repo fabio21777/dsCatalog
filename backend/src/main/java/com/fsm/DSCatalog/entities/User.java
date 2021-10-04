@@ -3,6 +3,7 @@ package com.fsm.DSCatalog.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ public class User {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	@Column(unique = true )
 	private String email;
 	private String password;
 	@ManyToMany(fetch = FetchType.EAGER)

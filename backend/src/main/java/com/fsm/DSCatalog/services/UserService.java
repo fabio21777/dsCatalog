@@ -81,12 +81,12 @@ public class UserService {
 	}
 	
 	private void copyDtoToEntity(UserDto dto, User entity) {
-		entity.setId(dto.getId());
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
 		entity.setEmail(dto.getEmail());
 		dto.getRoles().forEach(role -> entity.getRoles().add(roleRepository.getOne(role.getId())));
-	}	
+	}
+
 	
 	
 

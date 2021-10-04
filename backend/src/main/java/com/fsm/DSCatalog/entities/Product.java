@@ -29,9 +29,9 @@ import lombok.Setter;
 @Table(name = "tb_product")
 @Setter
 public class Product {
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
 	private Long id;
 	@Setter
 	private String name;
