@@ -2,6 +2,8 @@ package com.fsm.DSCatalog.controllers;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fsm.DSCatalog.Dto.UserDto;
 import com.fsm.DSCatalog.Dto.UserInsertDto;
+import com.fsm.DSCatalog.Dto.UserUpdateDto;
 import com.fsm.DSCatalog.services.UserService;
 
 @RestController
@@ -37,16 +40,16 @@ public class UserControlle {
 		return ResponseEntity.ok(dto);
 	}
 	@PostMapping
-	public ResponseEntity<UserDto> insert(@RequestBody UserInsertDto dto){
+	public ResponseEntity<UserDto> insert(@Valid @RequestBody UserInsertDto dto){
 		UserDto  newdto = userService.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newdto.getId()).toUri();
 		return ResponseEntity.created(uri).body(newdto);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDto>update(@PathVariable Long id, @RequestBody UserDto dto){
-		dto = userService.update(id,dto);
-		return ResponseEntity.ok(dto);
+	public ResponseEntity<UserDto>update( @PathVariable Long id, @RequestBody @Valid UserUpdateDto dto){
+		UserDto newDto = userService.update(id, dto);
+		return ResponseEntity.ok(newDto);
 	}
 	
 	@DeleteMapping(value = "/{id}")
