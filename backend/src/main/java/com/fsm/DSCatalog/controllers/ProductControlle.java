@@ -2,6 +2,8 @@ package com.fsm.DSCatalog.controllers;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,14 +38,14 @@ public class ProductControlle {
 		return ResponseEntity.ok(dto);
 	}
 	@PostMapping
-	public ResponseEntity<ProductDto> insert(@RequestBody ProductDto dto){
+	public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto dto){
 		dto = productService.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProductDto>update(@PathVariable Long id, @RequestBody ProductDto dto){
+	public ResponseEntity<ProductDto>update(@PathVariable Long id, @Valid @RequestBody ProductDto dto){
 		dto = productService.update(id,dto);
 		return ResponseEntity.ok(dto);
 	}
