@@ -26,7 +26,6 @@ import com.fsm.DSCatalog.entities.Category;
 import com.fsm.DSCatalog.entities.Product;
 import com.fsm.DSCatalog.repositories.CategoryRepository;
 import com.fsm.DSCatalog.repositories.ProductRepository;
-import com.fsm.DSCatalog.services.ProductService;
 import com.fsm.DSCatalog.services.exception.ControllerNotFoundException;
 import com.fsm.DSCatalog.services.exception.DataBaseException;
 import com.fsm.DSCatalog.tests.Factory;
